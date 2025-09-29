@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, jsonify
 from google.adk.runners import InMemoryRunner
-import character
 from google.genai import types
 import asyncio
+import os
 
 app = Flask(__name__)
 
 
-runner = InMemoryRunner(
-    agent=character.root_agent,
-    app_name="Demo App",
-)
+runner = None
+character_exists = os.path.exists('character.py')
+
+if character_exists:
+    import character
+    runner = InMemoryRunner(
+        agent=character.root_agent,
+        app_name="Demo App",
+    )
 
 adk_session = None
 session_lock = asyncio.Lock()
@@ -22,6 +27,11 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 async def chat():
+    user_message = request.json.get('message')
+
+    if not character_exists:
+        return jsonify({'response': user_message})
+
     global adk_session
     if adk_session is None:
         async with session_lock:
@@ -30,7 +40,6 @@ async def chat():
                     app_name=runner.app_name, user_id="inapp_user"
                 )
 
-    user_message = request.json.get('message')
     content = types.Content(parts=[types.Part(text=user_message)])
     response_text = ""
     async for event in runner.run_async(
