@@ -1,0 +1,71 @@
+# Byte-code files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Environments
+.env
+.venv/
+env/
+venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# MyPy
+.mypy_cache/
+
+# Virtualenv
+virtualenv/
+llm_venv/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+
+# Uploaded files
+media/
+
+# Static files
+static/
+
+# Node.js (if applicable)
+node_modules/
+npm-debug.log
+
+# Other common ignores
+*.bak
+*.tmp
