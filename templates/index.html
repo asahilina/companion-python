@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WakuWaku</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>WakuWaku</h1>
+        </header>
+        <div class="character-viewer">
+            <img id="character-image" src="/static/images/char-mouth-closed.png" alt="WakuWaku">
+        </div>
+        <p id="status">Ask me something!</p>
+        <footer class="chat-input-area">
+            <select id="voice-select"></select>
+            <textarea id="text-input" placeholder="Ask me anything..."></textarea>
+            <button id="send-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </footer>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+:root {
+    --background-color: #131416;
+    --container-background: #1A1B1E;
+    --text-color: #EAEAEA;
+    --primary-accent: #8A2BE2; /* BlueViolet */
+    --secondary-accent: #4169E1; /* RoyalBlue */
+    --input-background: #2C2D30;
+    --border-color: #333;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--container-background);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    height: 95vh;
+}
+
+.chat-header {
+    padding: 1rem;
+    background-color: var(--background-color);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.character-viewer {
+    text-align: center;
+    padding: 1rem;
+}
+
+.character-viewer #character-image {
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: -webkit-linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#status {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    gap: 0.5rem;
+}
+
+#voice-select {
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    height: 50px;
+}
+
+#text-input {
+    flex-grow: 1;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    height: 50px;
+    line-height: 1.5;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+#text-input:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+}
+
+#send-button {
+    background: none;
+    border: none;
+    color: var(--primary-accent);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+#send-button:hover {
+    color: var(--secondary-accent);
+}
+
+#send-button svg {
+    width: 24px;
+    height: 24px;
+}
