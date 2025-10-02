@@ -38,13 +38,6 @@ if [ ! -f "$PROJECT_FILE_PATH" ]; then
   return 1 # Return 1 as we are sourcing
 fi
 
-# Check if API Key file exists
-API_KEY_FILE_PATH=$(eval echo $API_KEY_FILE) # Expand potential ~
-if [ ! -f "$API_KEY_FILE_PATH" ]; then
-  echo "Error: API Key file not found at $API_KEY_FILE_PATH"
-  echo "Please create $API_KEY_FILE_PATH containing your AI Studio API Key."
-  return 1 # Return 1 as we are sourcing
-fi
 
 
 # 2. Set the default gcloud project configuration
@@ -53,9 +46,6 @@ echo "Setting gcloud config project to: $PROJECT_ID_FROM_FILE"
 # Adding --quiet; set -e will handle failure if the project doesn't exist or access is denied
 gcloud config set project "$PROJECT_ID_FROM_FILE" --quiet
 
-# 
-export GOOGLE_API_KEY=$(cat "$API_KEY_FILE_PATH")
-echo "Exported GOOGLE_API_KEY=$GOOGLE_API_KEY"
 
 # 3. Export PROJECT_ID (Get from config to confirm it was set correctly)
 export PROJECT_ID=$(gcloud config get project)
@@ -65,10 +55,6 @@ echo "Exported PROJECT_ID=$PROJECT_ID"
 # Using --format to extract just the projectNumber value
 export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} --format="value(projectNumber)")
 echo "Exported PROJECT_NUMBER=$PROJECT_NUMBER"
-
-# 5. Export SERVICE_ACCOUNT_NAME (Default Compute Service Account)
-export SERVICE_ACCOUNT_NAME=$(gcloud compute project-info describe --format="value(defaultServiceAccount)")
-echo "Exported SERVICE_ACCOUNT_NAME=$SERVICE_ACCOUNT_NAME"
 
 # 6. Export GOOGLE_CLOUD_PROJECT (Often used by client libraries)
 # This is usually the same as PROJECT_ID
@@ -87,9 +73,6 @@ echo "Exported GOOGLE_CLOUD_LOCATION=$GOOGLE_CLOUD_LOCATION"
 export REGION="$GOOGLE_CLOUD_LOCATION"
 echo "Exported REGION=$GOOGLE_CLOUD_LOCATION"
 
-# 13. Export REGION
-export BUCKET_NAME="$GOOGLE_CLOUD_PROJECT"-bgtyhnm
-echo "Exported BUCKET_NAME=$BUCKET_NAME"
 
 source ~/.bashrc
 
