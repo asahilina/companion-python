@@ -6,6 +6,7 @@
 
 # --- Configuration ---
 PROJECT_FILE="~/project_id.txt"
+API_KEY_FILE="~/api_key.txt"
 GOOGLE_CLOUD_LOCATION="us-central1"
 REPO_NAME="agentverse-repo"
 # ---------------------
@@ -37,11 +38,24 @@ if [ ! -f "$PROJECT_FILE_PATH" ]; then
   return 1 # Return 1 as we are sourcing
 fi
 
+# Check if API Key file exists
+API_KEY_FILE_PATH=$(eval echo $API_KEY_FILE) # Expand potential ~
+if [ ! -f "$API_KEY_FILE_PATH" ]; then
+  echo "Error: API Key file not found at $API_KEY_FILE_PATH"
+  echo "Please create $API_KEY_FILE_PATH containing your AI Studio API Key."
+  return 1 # Return 1 as we are sourcing
+fi
+
+
 # 2. Set the default gcloud project configuration
 PROJECT_ID_FROM_FILE=$(cat "$PROJECT_FILE_PATH")
 echo "Setting gcloud config project to: $PROJECT_ID_FROM_FILE"
 # Adding --quiet; set -e will handle failure if the project doesn't exist or access is denied
 gcloud config set project "$PROJECT_ID_FROM_FILE" --quiet
+
+# 
+export GOOGLE_API_KEY=$(cat "$API_KEY_FILE_PATH")
+echo "Exported GOOGLE_API_KEY=$GOOGLE_API_KEY"
 
 # 3. Export PROJECT_ID (Get from config to confirm it was set correctly)
 export PROJECT_ID=$(gcloud config get project)
